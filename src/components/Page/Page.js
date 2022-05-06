@@ -1,31 +1,35 @@
-import React, {useState, useEffect} from 'react';
-import { ErrorMessage } from '../StyledComponents/StyledComponents';
+import React, {useState, useEffect} from 'react'
+import { ErrorMessage } from '../StyledComponents/StyledComponents'
 import { CharactersList, LikeBtn, CharacterName, EveryItemList, PageButton, PageNumberCounter, FooterPage, SearchBar, SearchInput } from './Page.styles'
-import axios from 'axios';
+import axios from 'axios'
 
 const Page = () => {
-  const [data, setData] = useState([]); 
-  const [error, setError] = useState('');
-  const [currentPage, setCurrentPage] = useState('https://swapi.dev/api/people/')
-  const [pageNumber, setPageNumber] = useState(1);
-  const [searchInputValue, setSearchInputValue] = useState('');
-  const [searchingItem, setSearchingItem] = useState(`https://swapi.dev/api/people/?search=${searchInputValue}`);
+  const [data, setData] = useState([])
+  const [error, setError] = useState('')
+  const [nextToken, setNextToken] = useState(null)
+  const [previousToken, setPreviousToken] = useState(null)
+  const [pageNumber, setPageNumber] = useState(1)
+  const [searchInputValue, setSearchInputValue] = useState('')
+  const [searchingItem, setSearchingItem] = useState(`https://swapi.dev/api/people/?search=${searchInputValue}`)
   
-  const nextPage = () => {
-    setCurrentPage(axios.get(currentPage).data.next)
-  }
-  const fetchData = async () => {
+  const fetchData = async (token = null) => {
+    const page = token == null ? 'https://swapi.dev/api/people/' : token
+  
     try {
-      const res = await axios.get(currentPage);
-      setData(res.data.results);
+      const res = await axios.get(page)
+      const newPageNumber = page.split('=')[1] || 1
+      setNextToken(res.data.next)
+      setPreviousToken(res.data.previous)
+      setPageNumber(newPageNumber)
+      setData(res.data.results)
     } catch (e) {
-      setError(`Sorry, we couldn't load characters for you`);
+      setError(`Sorry, we couldn't load characters for you`)
     }
-  }
+  };
 
   useEffect(() => {
-    fetchData();
-  }, [currentPage])
+    fetchData()
+  }, [])
 
  return (
     <CharactersList> 
@@ -56,13 +60,12 @@ const Page = () => {
           }
       </ul>
       <FooterPage>
-          <PageButton onClick={() => pageNumber <= 1 ? null: setPageNumber(pageNumber - 1)}><i className="fa-solid fa-angle-left"></i></PageButton>
+          <PageButton onClick={() => fetchData(previousToken)} disabled={previousToken == null}><i className="fa-solid fa-angle-left"></i></PageButton>
           <PageNumberCounter>{pageNumber}</PageNumberCounter>
-          <PageButton onClick={() => pageNumber >= 9 ? null : setPageNumber(pageNumber + 1)}><i className="fa-solid fa-angle-right"></i></PageButton>
-          <button onClick={() => nextPage()}>test</button>
+          <PageButton  onClick={() => fetchData(nextToken)} disabled={nextToken == null}><i className="fa-solid fa-angle-right"></i></PageButton>
           {/* <PageButton onClick={() => setPageNumber(9)}><i className="fa-solid fa-angles-right"></i></PageButton> */}
       </FooterPage>
     </CharactersList>
- );
+ )
 }
-export default Page;
+export default Page
