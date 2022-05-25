@@ -1,11 +1,10 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Label = styled.label`
   font-family: Montserrat, sans-serif;
   font-weight: bold;
   font-size: 12px;
   color: black;
-  
 `;
 
 export const Input = styled.input`
@@ -15,9 +14,8 @@ export const Input = styled.input`
   box-shadow: -2px 4px 10px rgba(115, 124, 142, 0.09);
   border-radius: 10px;
   margin: 10px 0px;
-  background-color: #EFEFEF;
-  
-  
+  background-color: #efefef;
+
   resize: none;
   &:focus {
     outline: none;
@@ -38,22 +36,13 @@ export const Form = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #9C9C9C;
-  height: 100vh
-`;
-
-export const Error = styled.span`
-  font-size: 10px;
-  color: red; 
-  margin-bottom: 10px
+  background-color: #9c9c9c;
+  height: 100vh;
 `;
 
 export const ErrorMessage = styled.div`
   font-size: 20px;
-  color: #ff3333; 
+  color: #ff3333;
 `;
 
-export const Wrapper = styled.div`
-  
-`;
-
+export const Wrapper = styled.div``;
