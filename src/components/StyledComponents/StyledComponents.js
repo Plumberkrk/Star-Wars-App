@@ -41,8 +41,14 @@ export const Form = styled.div`
 `;
 
 export const ErrorMessage = styled.div`
-  font-size: 20px;
-  color: #ff3333;
+  text-align: center;
+  font-size: 35px;
+  background: -webkit-linear-gradient(#ff0033, #0099ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 `;
 
-export const Wrapper = styled.div``;
+export const ErrorContainer = styled.div`
+  display: flex;
+  margin: auto;
+`;
