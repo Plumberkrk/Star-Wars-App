@@ -9,7 +9,6 @@ export const CharactersList = styled.div`
 
     background-color: #29292a;
     color: white;
-    width: 100vw;
     width: 500px;
     height: 510px;
     
@@ -24,25 +23,48 @@ export const CharactersList = styled.div`
 
 export const LikeBtn = styled.i`
   cursor: pointer;
-  transition: color 0.1s ease-in-out;
+  transition: color 0.1s ease-in-out, transform 0.1s ease-in-out;
 
   :hover {
     color: #d06f6f;
+    transform: scale(1.3);
+  }
+`;
+
+export const LikeBtnActive = styled.i`
+  cursor: pointer;
+  color: #d06f6f;
+  transition: color 0.1s ease-in-out, transform 0.1s ease-in-out;
+
+  :hover {
+    color: #d06f6f;
+    transform: scale(1.3);
   }
 `;
 
 export const CharacterName = styled.span`
   margin-left: 25px;
+  cursor: pointer;
+  transition: opacity 0.1s ease-in-out, transform 0.1s;
+
+  :hover {
+    opacity: 0.6;
+    transform: scale(0.98);
+  }
 `;
 
 export const EveryItemList = styled.li`
   display: flex;
   align-items: center;
   font-size: 18px;
-  margin: 15px 0px;
+  margin: 7px 50px;
+
+  :first-child {
+    margin-top: 10px;
+  }
 
   :last-child {
-    margin: 0;
+    margin: 7px 50px 10px;
   }
 `;
 
@@ -106,5 +128,10 @@ export const SearchInput = styled.input`
 `;
 
 export const AllCharactersList = styled.ul`
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 0;
   height: 90%;
 `;
